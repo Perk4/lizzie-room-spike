@@ -64,9 +64,9 @@ function cyl(parent, rt, rb, h, color, x, y, z, opts) {
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xF5EAD6);
 
-const camera = new THREE.PerspectiveCamera(48, 9 / 16, 0.1, 60);
-camera.position.set(0, 6, 9.5);
-camera.lookAt(0, 0.8, -0.3);
+const camera = new THREE.PerspectiveCamera(52, 9 / 16, 0.1, 60);
+camera.position.set(0, 5.5, 8.5);
+camera.lookAt(0, 1.0, -0.5);
 
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -179,7 +179,7 @@ cyl(chair, 0.035, 0.035, 0.65, WOOD, -0.22, 0.36, 0.2);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, 0.22, 0.36, 0.2);
 
 const picture = new THREE.Group();
-picture.position.set(-2.5, 2.35, 1.2);
+picture.position.set(-1.8, 2.35, 0.8);
 room.add(picture);
 box(picture, 0.08, 0.6, 0.5, WOOD, 0, 0, 0);
 box(picture, 0.03, 0.5, 0.4, 0xF8F0E8, 0.04, 0, 0);
@@ -189,7 +189,7 @@ box(picture, 0.015, 0.12, 0.03, LEAF, 0.05, -0.08, 0.02);
 box(picture, 0.015, 0.1, 0.03, LEAF, 0.05, -0.06, -0.06);
 
 const board = new THREE.Group();
-board.position.set(-2.5, 2.1, -0.4);
+board.position.set(-1.8, 2.0, -0.6);
 board.userData.hotspot = "board";
 room.add(board);
 box(board, 0.08, 0.85, 0.65, WOOD, 0, 0, 0, { hotspot: "board" });
@@ -203,7 +203,7 @@ boardGlow.visible = false;
 boardGlow.name = "boardGlow";
 
 const plant = new THREE.Group();
-plant.position.set(2.0, 0, -0.3);
+plant.position.set(1.6, 0, -0.4);
 plant.userData.hotspot = "plant";
 room.add(plant);
 cyl(plant, 0.38, 0.32, 0.55, SAGE, 0, 0.28, 0, { hotspot: "plant" });

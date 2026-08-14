@@ -239,27 +239,27 @@ monsteraLeaf(plant, -0.08, 0.48, -0.06, -2.2, 0.75);
 monsteraLeaf(plant, 0.14, 0.42, 0, 1.2, 0.8);
 
 const cairn = new THREE.Group();
-cairn.position.set(0, 0.77, -0.6);
+cairn.position.set(0, 0.62, -0.55);
 cairn.userData.hotspot = "cairn";
 room.add(cairn);
 
-sph(cairn, 0.32, TERR, 0, 0.28, 0, { sy: 0.7, sx: 1.05, sz: 1.0, hotspot: "cairn" });
-sph(cairn, 0.28, TERR_LT, 0, 0.58, 0, { sy: 0.65, sx: 1.0, sz: 0.95, hotspot: "cairn" });
-sph(cairn, 0.24, TERR, 0, 0.84, 0, { sy: 0.6, sx: 0.98, sz: 0.92, hotspot: "cairn" });
-sph(cairn, 0.2, TERR_LT, 0, 1.04, 0, { sy: 0.55, sx: 0.95, sz: 0.9, hotspot: "cairn" });
-const cap = cyl(cairn, 0.22, 0.26, 0.1, OLIVE, 0, 1.24, 0, { hotspot: "cairn" });
+sph(cairn, 0.26, TERR, 0, 0.22, 0, { sy: 0.7, sx: 1.05, sz: 1.0, hotspot: "cairn" });
+sph(cairn, 0.22, TERR_LT, 0, 0.46, 0, { sy: 0.65, sx: 1.0, sz: 0.95, hotspot: "cairn" });
+sph(cairn, 0.19, TERR, 0, 0.67, 0, { sy: 0.6, sx: 0.98, sz: 0.92, hotspot: "cairn" });
+sph(cairn, 0.16, TERR_LT, 0, 0.83, 0, { sy: 0.55, sx: 0.95, sz: 0.9, hotspot: "cairn" });
+const cap = cyl(cairn, 0.18, 0.21, 0.08, OLIVE, 0, 0.99, 0, { hotspot: "cairn" });
 cap.rotation.x = 0.12;
 cap.rotation.z = -0.08;
 
-sph(cairn, 0.04, 0x2A2420, -0.08, 1.02, 0.18, { hotspot: "cairn" });
-sph(cairn, 0.04, 0x2A2420, 0.08, 1.02, 0.18, { hotspot: "cairn" });
+sph(cairn, 0.032, 0x2A2420, -0.065, 0.82, 0.14, { hotspot: "cairn" });
+sph(cairn, 0.032, 0x2A2420, 0.065, 0.82, 0.14, { hotspot: "cairn" });
 
-const leftArm = cyl(cairn, 0.03, 0.022, 0.42, TWIG, -0.28, 0.65, 0.15, { rz: 0.7, ry: -0.3, hotspot: "cairn" });
-const rightArm = cyl(cairn, 0.03, 0.022, 0.42, TWIG, 0.28, 0.65, 0.15, { rz: -0.7, ry: 0.3, hotspot: "cairn" });
-const pencil = cyl(cairn, 0.018, 0.018, 0.22, 0xE8C85A, 0.32, 0.42, 0.42, { rx: 1.1, rz: -0.3 });
-cyl(cairn, 0.02, 0.012, 0.04, 0xF8E8D8, 0.33, 0.36, 0.5, { rx: 1.1, rz: -0.3 });
+const leftArm = cyl(cairn, 0.024, 0.018, 0.34, TWIG, -0.22, 0.52, 0.12, { rz: 0.7, ry: -0.3, hotspot: "cairn" });
+const rightArm = cyl(cairn, 0.024, 0.018, 0.34, TWIG, 0.22, 0.52, 0.12, { rz: -0.7, ry: 0.3, hotspot: "cairn" });
+const pencil = cyl(cairn, 0.014, 0.014, 0.18, 0xE8C85A, 0.26, 0.34, 0.34, { rx: 1.1, rz: -0.3 });
+cyl(cairn, 0.016, 0.01, 0.032, 0xF8E8D8, 0.27, 0.29, 0.4, { rx: 1.1, rz: -0.3 });
 
-cairn.userData.baseY = 0.77;
+cairn.userData.baseY = 0.62;
 cairn.userData.sitting = true;
 
 const objectGoals = {

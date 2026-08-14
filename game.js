@@ -105,6 +105,8 @@ const TWIG = 0x8A6A48;
 const ROOM_W = 3.2;
 const ROOM_D = 2.6;
 const ROOM_H = 2.4;
+const RIM = 0x7A6A58;
+const RIM_THICK = 0.06;
 
 const floor = new THREE.Group();
 room.add(floor);
@@ -116,6 +118,11 @@ for (let i = 0; i < 5; i++) {
 box(room, 0.08, ROOM_H, ROOM_D, WALL, -ROOM_W / 2, ROOM_H / 2, 0);
 box(room, ROOM_W + 0.08, ROOM_H, 0.08, WALL, 0, ROOM_H / 2, -ROOM_D / 2);
 box(room, 0.08, ROOM_H, ROOM_D, WALL, ROOM_W / 2, ROOM_H / 2, 0);
+
+box(room, RIM_THICK, ROOM_H, ROOM_D + RIM_THICK, RIM, -ROOM_W / 2 - RIM_THICK / 2, ROOM_H / 2, 0);
+box(room, ROOM_W + RIM_THICK * 2, ROOM_H, RIM_THICK, RIM, 0, ROOM_H / 2, -ROOM_D / 2 - RIM_THICK / 2);
+box(room, RIM_THICK, ROOM_H, ROOM_D + RIM_THICK, RIM, ROOM_W / 2 + RIM_THICK / 2, ROOM_H / 2, 0);
+box(room, ROOM_W + RIM_THICK * 2, RIM_THICK, ROOM_D + RIM_THICK * 2, RIM, 0, -RIM_THICK / 2, 0);
 
 const winW = 0.9;
 const winH = 0.8;
@@ -216,7 +223,7 @@ boardGlow.visible = false;
 boardGlow.name = "boardGlow";
 
 const plant = new THREE.Group();
-plant.position.set(ROOM_W / 2 - 0.4, 0, 0.4);
+plant.position.set(ROOM_W / 2 - 0.55, 0, 0.15);
 plant.userData.hotspot = "plant";
 room.add(plant);
 cyl(plant, 0.22, 0.18, 0.36, SAGE, 0, 0.18, 0, { hotspot: "plant" });

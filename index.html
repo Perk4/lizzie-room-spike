@@ -48,17 +48,29 @@
     }
     .topbar-status { font-size: 17px; font-weight: 650; line-height: 1.25; color: var(--ink); }
     .dock {
-      position: absolute; left: 12px; right: 12px;
-      bottom: calc(14px + env(safe-area-inset-bottom));
-      z-index: 6; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      position: absolute; left: 50%; transform: translateX(-50%);
+      bottom: calc(20px + env(safe-area-inset-bottom));
+      z-index: 6; display: flex; flex-direction: column; gap: 10px;
+      width: 220px;
     }
     .dock button {
-      height: 48px; border: 0; border-radius: 14px; font: inherit;
-      font-weight: 650; font-size: 15px; cursor: pointer;
+      height: 52px; border: 0; border-radius: 26px; font: inherit;
+      font-weight: 650; font-size: 16px; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-    .btn-session { background: #4A3A28; color: var(--cream); }
-    .btn-session:disabled { opacity: 0.45; cursor: default; }
-    .btn-needs { background: rgba(74, 58, 40, 0.10); color: var(--ink); }
+    .btn-session { background: #E8A090; color: #3A2E22; }
+    .btn-session:disabled { opacity: 0.5; cursor: default; }
+    .btn-needs { background: #A8B89A; color: #3A2E22; }
+    .corner-btn {
+      position: absolute; width: 44px; height: 44px;
+      border: 0; border-radius: 50%; background: rgba(255,255,255,0.92);
+      color: var(--ink); cursor: pointer; z-index: 6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .corner-btn.left { left: 16px; bottom: calc(28px + env(safe-area-inset-bottom)); }
+    .corner-btn.right { right: 16px; bottom: calc(28px + env(safe-area-inset-bottom)); }
     .badge {
       display: inline-flex; min-width: 18px; height: 18px; margin-left: 6px;
       border-radius: 99px; background: #5A7048; color: #F6EDC8;
@@ -70,36 +82,46 @@
     }
     .overlay.open { opacity: 1; visibility: visible; }
     .sheet {
-      position: absolute; left: 12px; right: 12px; bottom: 12px;
+      position: absolute; left: 0; right: 0; bottom: 0;
       max-height: min(72dvh, 560px); overflow: auto;
-      background: var(--card); color: #F6EDC8;
-      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--line); border-radius: 20px;
-      padding: 18px 16px 16px; transform: translateY(18px);
-      opacity: 0; visibility: hidden;
-      transition: transform 0.22s ease, opacity 0.22s ease; z-index: 11;
+      background: rgba(246, 237, 200, 0.97); color: var(--ink);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-top-left-radius: 16px; border-top-right-radius: 16px;
+      padding: 8px 20px calc(20px + env(safe-area-inset-bottom));
+      transform: translateY(100%);
+      opacity: 1; visibility: hidden;
+      transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1); z-index: 11;
     }
-    .sheet.open { transform: none; opacity: 1; visibility: visible; }
-    .sheet h2 { font-size: 18px; margin-bottom: 10px; }
-    .sheet p, .sheet li { font-size: 14px; line-height: 1.45; color: rgba(246,237,200,0.88); }
-    .row { display: flex; gap: 8px; margin-top: 16px; }
+    .sheet.open { transform: none; visibility: visible; }
+    .sheet-grabber {
+      width: 36px; height: 5px; background: rgba(58, 46, 34, 0.2);
+      border-radius: 3px; margin: 0 auto 14px;
+    }
+    .sheet h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .sheet .goal-label { font-size: 13px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .sheet p, .sheet li { font-size: 15px; line-height: 1.5; color: var(--ink); }
+    .row { display: flex; gap: 10px; margin-top: 18px; }
     .row button, .cta {
-      flex: 1; height: 44px; border: 0; border-radius: 12px;
-      font: inherit; font-weight: 700; cursor: pointer;
+      flex: 1; height: 50px; border: 0; border-radius: 14px;
+      font: inherit; font-weight: 600; font-size: 16px; cursor: pointer;
     }
-    .cta { background: var(--ok); color: #1d2a12; width: 100%; margin-top: 16px; }
-    .approve { background: var(--ok); color: #1d2a12; }
-    .reject { background: transparent; color: var(--danger); border: 1px solid rgba(232,160,144,0.45) !important; }
-    .ghost { background: transparent; color: #F6EDC8; border: 1px solid var(--line) !important; }
+    .cta { background: #5A7048; color: #F6EDC8; width: 100%; margin-top: 18px; }
+    .approve { background: #5A7048; color: #F6EDC8; }
+    .reject { background: rgba(58, 46, 34, 0.08); color: var(--ink); }
+    .ghost { background: rgba(58, 46, 34, 0.08); color: var(--ink); }
+    .add-item-btn { background: rgba(58, 46, 34, 0.06); color: var(--ink); border: 1px dashed rgba(58, 46, 34, 0.25); margin-top: 14px; }
     .log { margin-top: 12px; font-size: 12px; color: rgba(246,237,200,0.6); }
     .need {
-      width: 100%; text-align: left; background: rgba(255,245,220,0.06);
-      border: 1px solid var(--line); border-radius: 12px; color: inherit;
-      padding: 12px; font: inherit; cursor: pointer;
+      width: 100%; text-align: left; background: rgba(58, 46, 34, 0.06);
+      border: 0; border-radius: 14px; color: inherit;
+      padding: 14px 16px; font: inherit; cursor: pointer; margin-bottom: 10px;
     }
-    .empty { color: rgba(246,237,200,0.55); font-size: 14px; }
-    .claim { margin: 8px 0; padding-left: 18px; }
-    .src { font-size: 12px; color: rgba(246,237,200,0.55); margin-top: 8px; }
+    .need:last-child { margin-bottom: 0; }
+    .empty { color: var(--muted); font-size: 15px; text-align: center; padding: 20px 0; }
+    .claim { margin: 10px 0; padding-left: 18px; }
+    .src { font-size: 13px; color: var(--muted); margin-top: 12px; padding: 12px; background: rgba(58,46,34,0.05); border-radius: 10px; }
+    .items-list { margin-top: 12px; }
+    .item-chip { display: inline-block; background: rgba(58,46,34,0.08); padding: 6px 12px; border-radius: 8px; font-size: 13px; margin: 4px 4px 4px 0; }
   </style>
   <script type="importmap">
   { "imports": { "three": "https://unpkg.com/three@0.160.1/build/three.module.js" } }
@@ -114,19 +136,24 @@
     </header>
     <div class="dock" id="dock">
       <button class="btn-session" id="btn-session">Start session</button>
-      <button class="btn-needs" id="btn-needs">What needs me <span class="badge" id="need-count" hidden>0</span></button>
+      <button class="btn-needs" id="btn-needs">What needs me</button>
     </div>
+    <button class="corner-btn left" id="btn-settings" aria-label="Settings">✿</button>
+    <button class="corner-btn right" id="btn-info" aria-label="Info">𝒾</button>
     <div class="overlay" id="overlay"></div>
     <section class="sheet" id="sheet-approval" role="dialog">
+      <div class="sheet-grabber"></div>
       <h2>Approve this work?</h2>
       <p>Lizzie researched beginner ceramics classes nearby. Dummy pass, not live lookups.</p>
-      <p style="margin-top:10px">On your authority. Lizzie cannot confirm this for you.</p>
+      <p style="margin-top:10px; color: var(--muted); font-size: 13px;">On your authority. Lizzie cannot confirm this for you.</p>
       <div class="row">
-        <button class="approve" id="btn-approve">Approve</button>
         <button class="reject" id="btn-reject">Reject</button>
+        <button class="approve" id="btn-approve">Approve</button>
       </div>
     </section>
     <section class="sheet" id="sheet-artifact" role="dialog">
+      <div class="sheet-grabber"></div>
+      <p class="goal-label">Ceramics Research</p>
       <h2>Studio shortlist</h2>
       <p>Claims from the mock research pass:</p>
       <ul class="claim">
@@ -134,14 +161,21 @@
         <li>Mudworks Studio — weekday evenings, $35, hand-building only</li>
         <li>The Potter&apos;s Bench — drop-in, $50, all techniques</li>
       </ul>
-      <p class="src">Sources: studio sites, Maps reviews, class pages. Dummy ceramics first-playable copy.</p>
+      <div class="src">
+        <strong style="display:block; margin-bottom:4px; color: var(--ink);">Sources</strong>
+        Studio sites, Maps reviews, class pages. Dummy ceramics first-playable copy.
+      </div>
       <button class="cta" id="btn-artifact-close">Close</button>
     </section>
     <section class="sheet" id="sheet-needs" role="dialog">
+      <div class="sheet-grabber"></div>
       <h2>What needs me</h2>
       <div id="needs-body"></div>
       <p class="log" id="session-log"></p>
       <button class="ghost cta" id="btn-needs-close" style="margin-top:16px">Close</button>
+    </section>
+    <section class="sheet" id="sheet-goal" role="dialog">
+      <div id="goal-sheet-content"></div>
     </section>
   </div>
   <script type="module" src="./game.js"></script>

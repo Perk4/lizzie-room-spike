@@ -64,9 +64,9 @@ function cyl(parent, rt, rb, h, color, x, y, z, opts) {
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xF5EAD6);
 
-const camera = new THREE.PerspectiveCamera(32, 9 / 16, 0.1, 60);
-camera.position.set(0, 4.2, 7.5);
-camera.lookAt(0, 1.4, 0);
+const camera = new THREE.PerspectiveCamera(34, 9 / 16, 0.1, 60);
+camera.position.set(0, 3.8, 5.5);
+camera.lookAt(0, 1.6, -0.5);
 
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -96,32 +96,32 @@ const TWIG = 0x8A6A48;
 const floor = new THREE.Group();
 room.add(floor);
 for (let i = 0; i < 8; i++) {
-  const z = -3.2 + i * 0.9;
-  box(floor, 6, 0.1, 0.82, i % 2 ? WOOD : WOOD_DK, 0, 0.05, z);
+  const z = -2.8 + i * 0.8;
+  box(floor, 5, 0.1, 0.72, i % 2 ? WOOD : WOOD_DK, 0, 0.05, z);
 }
 
-box(room, 0.15, 4.5, 7, WALL, -3.2, 2.25, 0);
-box(room, 7, 4.5, 0.15, WALL, 0, 2.25, -3.5);
+box(room, 0.15, 4.5, 6, WALL, -2.65, 2.25, 0);
+box(room, 5.5, 4.5, 0.15, WALL, 0, 2.25, -2.9);
 
-const winW = 1.8;
-const winH = 1.6;
-const winY = 2.4;
+const winW = 1.6;
+const winH = 1.5;
+const winY = 2.3;
 const windowGroup = new THREE.Group();
-windowGroup.position.set(0, 0, -3.35);
+windowGroup.position.set(0, 0, -2.75);
 windowGroup.userData.hotspot = "window";
 room.add(windowGroup);
-box(windowGroup, winW + 0.3, 0.15, 0.2, WOOD, 0, winY - winH / 2 - 0.08, 0, { hotspot: "window" });
-box(windowGroup, winW + 0.3, 0.15, 0.2, WOOD, 0, winY + winH / 2 + 0.08, 0, { hotspot: "window" });
-box(windowGroup, 0.15, winH + 0.3, 0.2, WOOD, -winW / 2 - 0.08, winY, 0, { hotspot: "window" });
-box(windowGroup, 0.15, winH + 0.3, 0.2, WOOD, winW / 2 + 0.08, winY, 0, { hotspot: "window" });
-box(windowGroup, 0.08, winH, 0.12, WOOD, 0, winY, 0.02, { hotspot: "window" });
-box(windowGroup, winW, 0.08, 0.12, WOOD, 0, winY, 0.02, { hotspot: "window" });
-const sky = box(windowGroup, winW - 0.05, winH - 0.05, 0.05, SKY, 0, winY, -0.1, { hotspot: "window" });
-sph(windowGroup, 0.35, 0xF0F4F8, -0.4, winY + 0.25, -0.15, { sx: 1.3, sy: 0.5, sz: 0.3, hotspot: "window" });
-sph(windowGroup, 0.3, 0xF4F8FC, 0.35, winY + 0.1, -0.15, { sx: 1.4, sy: 0.45, sz: 0.3, hotspot: "window" });
+box(windowGroup, winW + 0.28, 0.14, 0.18, WOOD, 0, winY - winH / 2 - 0.07, 0, { hotspot: "window" });
+box(windowGroup, winW + 0.28, 0.14, 0.18, WOOD, 0, winY + winH / 2 + 0.07, 0, { hotspot: "window" });
+box(windowGroup, 0.14, winH + 0.28, 0.18, WOOD, -winW / 2 - 0.07, winY, 0, { hotspot: "window" });
+box(windowGroup, 0.14, winH + 0.28, 0.18, WOOD, winW / 2 + 0.07, winY, 0, { hotspot: "window" });
+box(windowGroup, 0.06, winH, 0.1, WOOD, 0, winY, 0.02, { hotspot: "window" });
+box(windowGroup, winW, 0.06, 0.1, WOOD, 0, winY, 0.02, { hotspot: "window" });
+const sky = box(windowGroup, winW - 0.04, winH - 0.04, 0.04, SKY, 0, winY, -0.08, { hotspot: "window" });
+sph(windowGroup, 0.3, 0xF0F4F8, -0.35, winY + 0.22, -0.12, { sx: 1.3, sy: 0.5, sz: 0.3, hotspot: "window" });
+sph(windowGroup, 0.25, 0xF4F8FC, 0.3, winY + 0.08, -0.12, { sx: 1.4, sy: 0.45, sz: 0.3, hotspot: "window" });
 
 const desk = new THREE.Group();
-desk.position.set(0, 0, 0.3);
+desk.position.set(0, 0, 0.5);
 desk.userData.hotspot = "desk";
 room.add(desk);
 box(desk, 1.9, 0.12, 1.0, WOOD, 0, 1.08, 0, { hotspot: "desk" });
@@ -169,17 +169,17 @@ glow.visible = false;
 glow.name = "glow";
 
 const chair = new THREE.Group();
-chair.position.set(0, 0, 1.35);
+chair.position.set(0, 0, -0.6);
 room.add(chair);
 box(chair, 0.58, 0.1, 0.52, SAGE_LT, 0, 0.72, 0);
-box(chair, 0.52, 0.5, 0.08, SAGE_LT, 0, 1.0, -0.22);
+box(chair, 0.52, 0.5, 0.08, SAGE_LT, 0, 1.0, 0.22);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, -0.22, 0.36, -0.2);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, 0.22, 0.36, -0.2);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, -0.22, 0.36, 0.2);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, 0.22, 0.36, 0.2);
 
 const board = new THREE.Group();
-board.position.set(-3.05, 2.1, 0.2);
+board.position.set(-3.05, 2.1, 0);
 board.userData.hotspot = "board";
 room.add(board);
 box(board, 0.1, 0.9, 0.7, WOOD, 0, 0, 0, { hotspot: "board" });
@@ -193,7 +193,7 @@ boardGlow.visible = false;
 boardGlow.name = "boardGlow";
 
 const plant = new THREE.Group();
-plant.position.set(2.1, 0, -0.5);
+plant.position.set(2.0, 0, -0.3);
 plant.userData.hotspot = "plant";
 room.add(plant);
 cyl(plant, 0.38, 0.32, 0.55, SAGE, 0, 0.28, 0, { hotspot: "plant" });
@@ -216,7 +216,7 @@ monsteraLeaf(plant, -0.1, 0.6, -0.08, -2.2, 0.85);
 monsteraLeaf(plant, 0.18, 0.52, 0, 1.2, 0.9);
 
 const cairn = new THREE.Group();
-cairn.position.set(0, 0.77, 1.35);
+cairn.position.set(0, 0.77, -0.6);
 cairn.userData.hotspot = "cairn";
 room.add(cairn);
 
@@ -231,10 +231,10 @@ cap.rotation.z = -0.08;
 sph(cairn, 0.04, 0x2A2420, -0.08, 1.02, 0.18, { hotspot: "cairn" });
 sph(cairn, 0.04, 0x2A2420, 0.08, 1.02, 0.18, { hotspot: "cairn" });
 
-const leftArm = cyl(cairn, 0.03, 0.022, 0.42, TWIG, -0.28, 0.65, 0.05, { rz: 0.9, ry: -0.4, hotspot: "cairn" });
-const rightArm = cyl(cairn, 0.03, 0.022, 0.42, TWIG, 0.28, 0.65, 0.05, { rz: -0.9, ry: 0.4, hotspot: "cairn" });
-const pencil = cyl(cairn, 0.018, 0.018, 0.22, 0xE8C85A, 0.32, 0.38, -0.35, { rx: 1.1, rz: -0.25 });
-cyl(cairn, 0.02, 0.012, 0.04, 0xF8E8D8, 0.34, 0.32, -0.42, { rx: 1.1, rz: -0.25 });
+const leftArm = cyl(cairn, 0.03, 0.022, 0.42, TWIG, -0.28, 0.65, 0.15, { rz: 0.7, ry: -0.3, hotspot: "cairn" });
+const rightArm = cyl(cairn, 0.03, 0.022, 0.42, TWIG, 0.28, 0.65, 0.15, { rz: -0.7, ry: 0.3, hotspot: "cairn" });
+const pencil = cyl(cairn, 0.018, 0.018, 0.22, 0xE8C85A, 0.32, 0.42, 0.42, { rx: 1.1, rz: -0.3 });
+cyl(cairn, 0.02, 0.012, 0.04, 0xF8E8D8, 0.33, 0.36, 0.5, { rx: 1.1, rz: -0.3 });
 
 cairn.userData.baseY = 0.77;
 cairn.userData.sitting = true;

@@ -64,9 +64,9 @@ function cyl(parent, rt, rb, h, color, x, y, z, opts) {
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xF5EAD6);
 
-const camera = new THREE.PerspectiveCamera(34, 9 / 16, 0.1, 60);
-camera.position.set(0, 3.8, 5.5);
-camera.lookAt(0, 1.6, -0.5);
+const camera = new THREE.PerspectiveCamera(44, 9 / 16, 0.1, 60);
+camera.position.set(0, 5.5, 8);
+camera.lookAt(0, 1.0, -0.5);
 
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace;

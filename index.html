@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lizzie Room</title>
+  <style>
+    :root {
+      --cream: #F6EDC8;
+      --page: #E8D4B0;
+      --ink: #3A2E22;
+      --muted: #7A6A52;
+      --card: rgba(42, 32, 24, 0.82);
+      --line: rgba(255, 245, 220, 0.16);
+      --ok: #C4E08A;
+      --danger: #E8A090;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--page);
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100dvh;
+    }
+    .phone {
+      width: min(100vw, 430px);
+      height: 100dvh;
+      max-height: 100dvh;
+      position: relative;
+      overflow: hidden;
+      background: #EFE2C4;
+      box-shadow: 0 16px 48px rgba(80, 50, 20, 0.18);
+    }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    .topbar {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+      padding: calc(12px + env(safe-area-inset-top)) 16px 14px;
+      background: linear-gradient(to bottom, rgba(246,237,200,0.96), rgba(246,237,200,0.5) 72%, transparent);
+      pointer-events: none;
+    }
+    .topbar-kicker {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 4px;
+    }
+    .topbar-status { font-size: 17px; font-weight: 650; line-height: 1.25; color: var(--ink); }
+    .dock {
+      position: absolute; left: 12px; right: 12px;
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      z-index: 6; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .dock button {
+      height: 48px; border: 0; border-radius: 14px; font: inherit;
+      font-weight: 650; font-size: 15px; cursor: pointer;
+    }
+    .btn-session { background: #4A3A28; color: var(--cream); }
+    .btn-session:disabled { opacity: 0.45; cursor: default; }
+    .btn-needs { background: rgba(74, 58, 40, 0.10); color: var(--ink); }
+    .badge {
+      display: inline-flex; min-width: 18px; height: 18px; margin-left: 6px;
+      border-radius: 99px; background: #5A7048; color: #F6EDC8;
+      font-size: 11px; align-items: center; justify-content: center; padding: 0 5px;
+    }
+    .overlay {
+      position: absolute; inset: 0; background: rgba(42, 32, 24, 0.38);
+      opacity: 0; visibility: hidden; transition: opacity 0.2s ease; z-index: 10;
+    }
+    .overlay.open { opacity: 1; visibility: visible; }
+    .sheet {
+      position: absolute; left: 12px; right: 12px; bottom: 12px;
+      max-height: min(72dvh, 560px); overflow: auto;
+      background: var(--card); color: #F6EDC8;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--line); border-radius: 20px;
+      padding: 18px 16px 16px; transform: translateY(18px);
+      opacity: 0; visibility: hidden;
+      transition: transform 0.22s ease, opacity 0.22s ease; z-index: 11;
+    }
+    .sheet.open { transform: none; opacity: 1; visibility: visible; }
+    .sheet h2 { font-size: 18px; margin-bottom: 10px; }
+    .sheet p, .sheet li { font-size: 14px; line-height: 1.45; color: rgba(246,237,200,0.88); }
+    .row { display: flex; gap: 8px; margin-top: 16px; }
+    .row button, .cta {
+      flex: 1; height: 44px; border: 0; border-radius: 12px;
+      font: inherit; font-weight: 700; cursor: pointer;
+    }
+    .cta { background: var(--ok); color: #1d2a12; width: 100%; margin-top: 16px; }
+    .approve { background: var(--ok); color: #1d2a12; }
+    .reject { background: transparent; color: var(--danger); border: 1px solid rgba(232,160,144,0.45) !important; }
+    .ghost { background: transparent; color: #F6EDC8; border: 1px solid var(--line) !important; }
+    .log { margin-top: 12px; font-size: 12px; color: rgba(246,237,200,0.6); }
+    .need {
+      width: 100%; text-align: left; background: rgba(255,245,220,0.06);
+      border: 1px solid var(--line); border-radius: 12px; color: inherit;
+      padding: 12px; font: inherit; cursor: pointer;
+    }
+    .empty { color: rgba(246,237,200,0.55); font-size: 14px; }
+    .claim { margin: 8px 0; padding-left: 18px; }
+    .src { font-size: 12px; color: rgba(246,237,200,0.55); margin-top: 8px; }
+  </style>
+  <script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.160.1/build/three.module.js" } }
+  </script>
+</head>
+<body>
+  <div class="phone" id="phone">
+    <canvas id="view"></canvas>
+    <header class="topbar">
+      <div class="topbar-kicker">Lizzie</div>
+      <div class="topbar-status" id="status">Ready when you are.</div>
+    </header>
+    <div class="dock" id="dock">
+      <button class="btn-session" id="btn-session">Start session</button>
+      <button class="btn-needs" id="btn-needs">What needs me <span class="badge" id="need-count" hidden>0</span></button>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <section class="sheet" id="sheet-approval" role="dialog">
+      <h2>Approve this work?</h2>
+      <p>Lizzie researched beginner ceramics classes nearby. Dummy pass, not live lookups.</p>
+      <p style="margin-top:10px">On your authority. Lizzie cannot confirm this for you.</p>
+      <div class="row">
+        <button class="approve" id="btn-approve">Approve</button>
+        <button class="reject" id="btn-reject">Reject</button>
+      </div>
+    </section>
+    <section class="sheet" id="sheet-artifact" role="dialog">
+      <h2>Studio shortlist</h2>
+      <p>Claims from the mock research pass:</p>
+      <ul class="claim">
+        <li>Clay Collective — Saturdays 10am, $45, wheel and hand-building</li>
+        <li>Mudworks Studio — weekday evenings, $35, hand-building only</li>
+        <li>The Potter&apos;s Bench — drop-in, $50, all techniques</li>
+      </ul>
+      <p class="src">Sources: studio sites, Maps reviews, class pages. Dummy ceramics first-playable copy.</p>
+      <button class="cta" id="btn-artifact-close">Close</button>
+    </section>
+    <section class="sheet" id="sheet-needs" role="dialog">
+      <h2>What needs me</h2>
+      <div id="needs-body"></div>
+      <p class="log" id="session-log"></p>
+      <button class="ghost cta" id="btn-needs-close" style="margin-top:16px">Close</button>
+    </section>
+  </div>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>

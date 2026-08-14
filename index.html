@@ -6,8 +6,8 @@
   <title>Lizzie Room</title>
   <style>
     :root {
-      --cream: #F6EDC8;
-      --page: #E8D4B0;
+      --cream: #F5EAD6;
+      --page: #F5EAD6;
       --ink: #3A2E22;
       --muted: #7A6A52;
       --card: rgba(42, 32, 24, 0.82);
@@ -32,14 +32,14 @@
       max-height: 100dvh;
       position: relative;
       overflow: hidden;
-      background: #EFE2C4;
+      background: #F5EAD6;
       box-shadow: 0 16px 48px rgba(80, 50, 20, 0.18);
     }
     canvas { display: block; width: 100%; height: 100%; touch-action: none; }
     .topbar {
       position: absolute; top: 0; left: 0; right: 0; z-index: 5;
       padding: calc(12px + env(safe-area-inset-top)) 16px 14px;
-      background: linear-gradient(to bottom, rgba(246,237,200,0.96), rgba(246,237,200,0.5) 72%, transparent);
+      background: linear-gradient(to bottom, rgba(245,234,214,0.96), rgba(245,234,214,0.5) 72%, transparent);
       pointer-events: none;
     }
     .topbar-kicker {
@@ -63,7 +63,7 @@
     .btn-needs { background: #A8B89A; color: #3A2E22; }
     .corner-btn {
       position: absolute; width: 44px; height: 44px;
-      border: 0; border-radius: 50%; background: rgba(255,255,255,0.92);
+      border: 0; border-radius: 50%; background: rgba(255,255,255,0.95);
       color: var(--ink); cursor: pointer; z-index: 6;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       display: flex; align-items: center; justify-content: center;
@@ -84,7 +84,7 @@
     .sheet {
       position: absolute; left: 0; right: 0; bottom: 0;
       max-height: min(72dvh, 560px); overflow: auto;
-      background: rgba(246, 237, 200, 0.97); color: var(--ink);
+      background: rgba(245, 234, 214, 0.97); color: var(--ink);
       backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
       border-top-left-radius: 16px; border-top-right-radius: 16px;
       padding: 8px 20px calc(20px + env(safe-area-inset-bottom));

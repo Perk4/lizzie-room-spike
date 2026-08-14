@@ -178,17 +178,27 @@ cyl(chair, 0.035, 0.035, 0.65, WOOD, 0.22, 0.36, -0.2);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, -0.22, 0.36, 0.2);
 cyl(chair, 0.035, 0.035, 0.65, WOOD, 0.22, 0.36, 0.2);
 
+const picture = new THREE.Group();
+picture.position.set(-2.5, 2.35, 1.2);
+room.add(picture);
+box(picture, 0.08, 0.6, 0.5, WOOD, 0, 0, 0);
+box(picture, 0.03, 0.5, 0.4, 0xF8F0E8, 0.04, 0, 0);
+sph(picture, 0.08, 0xE8A090, 0.05, 0.08, 0.05, { sy: 0.6 });
+sph(picture, 0.06, 0xE8A090, 0.05, 0.06, -0.08, { sy: 0.5 });
+box(picture, 0.015, 0.12, 0.03, LEAF, 0.05, -0.08, 0.02);
+box(picture, 0.015, 0.1, 0.03, LEAF, 0.05, -0.06, -0.06);
+
 const board = new THREE.Group();
-board.position.set(-3.05, 2.1, 0);
+board.position.set(-2.5, 2.1, -0.4);
 board.userData.hotspot = "board";
 room.add(board);
-box(board, 0.1, 0.9, 0.7, WOOD, 0, 0, 0, { hotspot: "board" });
-box(board, 0.04, 0.8, 0.6, CORK, 0.05, 0, 0, { hotspot: "board" });
-box(board, 0.02, 0.2, 0.15, 0xE8D0C0, 0.08, 0.18, -0.12, { hotspot: "board" });
-box(board, 0.02, 0.18, 0.12, 0xD4E8C0, 0.08, -0.08, 0.15, { hotspot: "board" });
-box(board, 0.02, 0.12, 0.16, 0xF8E8D0, 0.08, 0.25, 0.18, { hotspot: "board" });
-box(board, 0.02, 0.14, 0.11, 0xF0D8D8, 0.08, -0.22, -0.08, { hotspot: "board" });
-const boardGlow = box(board, 0.02, 0.8, 0.6, 0xFFF8D0, 0.07, 0, 0, { mat: { transparent: true, opacity: 0.4 } });
+box(board, 0.08, 0.85, 0.65, WOOD, 0, 0, 0, { hotspot: "board" });
+box(board, 0.03, 0.75, 0.55, CORK, 0.04, 0, 0, { hotspot: "board" });
+box(board, 0.015, 0.18, 0.14, 0xE8D0C0, 0.06, 0.16, -0.1, { hotspot: "board" });
+box(board, 0.015, 0.16, 0.11, 0xD4E8C0, 0.06, -0.06, 0.14, { hotspot: "board" });
+box(board, 0.015, 0.11, 0.14, 0xF8E8D0, 0.06, 0.22, 0.16, { hotspot: "board" });
+box(board, 0.015, 0.13, 0.1, 0xF0D8D8, 0.06, -0.2, -0.06, { hotspot: "board" });
+const boardGlow = box(board, 0.015, 0.75, 0.55, 0xFFF8D0, 0.05, 0, 0, { mat: { transparent: true, opacity: 0.4 } });
 boardGlow.visible = false;
 boardGlow.name = "boardGlow";
 

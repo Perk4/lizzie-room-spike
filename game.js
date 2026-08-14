@@ -62,23 +62,23 @@ function cyl(parent, rt, rb, h, color, x, y, z, opts) {
 }
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xE8DFD0);
+scene.background = new THREE.Color(0xE8E0D4);
 
-const camera = new THREE.PerspectiveCamera(28, 9 / 16, 0.1, 100);
-camera.position.set(5.5, 6.5, 8);
-camera.lookAt(0, 1.2, 0);
+const camera = new THREE.PerspectiveCamera(14, 9 / 16, 0.1, 100);
+camera.position.set(9, 10, 14);
+camera.lookAt(0, 0.8, 0);
 
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-const ambientLight = new THREE.AmbientLight(0xFFF8F0, 0.6);
+const ambientLight = new THREE.AmbientLight(0xFFF8F0, 0.7);
 scene.add(ambientLight);
-const keyLight = new THREE.DirectionalLight(0xFFFAF0, 0.8);
-keyLight.position.set(4, 8, 6);
+const keyLight = new THREE.DirectionalLight(0xFFFAF0, 0.6);
+keyLight.position.set(5, 10, 8);
 scene.add(keyLight);
-const fillLight = new THREE.DirectionalLight(0xF0F4FF, 0.3);
-fillLight.position.set(-3, 4, 2);
+const fillLight = new THREE.DirectionalLight(0xF0F4FF, 0.25);
+fillLight.position.set(-4, 6, 4);
 scene.add(fillLight);
 
 const room = new THREE.Group();
@@ -102,125 +102,125 @@ const PAPER = 0xFAF6EC;
 const CORK = 0xC4A070;
 const TWIG = 0x8A6A48;
 
-const ROOM_W = 4.0;
-const ROOM_D = 3.2;
-const ROOM_H = 3.2;
+const ROOM_W = 3.2;
+const ROOM_D = 2.6;
+const ROOM_H = 2.4;
 
 const floor = new THREE.Group();
 room.add(floor);
-for (let i = 0; i < 6; i++) {
-  const z = -ROOM_D / 2 + 0.25 + i * 0.55;
-  box(floor, ROOM_W, 0.08, 0.5, i % 2 ? WOOD : WOOD_DK, 0, 0.04, z);
+for (let i = 0; i < 5; i++) {
+  const z = -ROOM_D / 2 + 0.26 + i * 0.52;
+  box(floor, ROOM_W, 0.08, 0.46, i % 2 ? WOOD : WOOD_DK, 0, 0.04, z);
 }
 
-box(room, 0.1, ROOM_H, ROOM_D, WALL, -ROOM_W / 2, ROOM_H / 2, 0);
-box(room, ROOM_W + 0.1, ROOM_H, 0.1, WALL, 0, ROOM_H / 2, -ROOM_D / 2);
-box(room, 0.1, ROOM_H, ROOM_D, WALL, ROOM_W / 2, ROOM_H / 2, 0);
+box(room, 0.08, ROOM_H, ROOM_D, WALL, -ROOM_W / 2, ROOM_H / 2, 0);
+box(room, ROOM_W + 0.08, ROOM_H, 0.08, WALL, 0, ROOM_H / 2, -ROOM_D / 2);
+box(room, 0.08, ROOM_H, ROOM_D, WALL, ROOM_W / 2, ROOM_H / 2, 0);
 
-const winW = 1.2;
-const winH = 1.1;
-const winY = 1.8;
+const winW = 0.9;
+const winH = 0.8;
+const winY = 1.5;
 const windowGroup = new THREE.Group();
-windowGroup.position.set(0, 0, -ROOM_D / 2 + 0.06);
+windowGroup.position.set(0.5, 0, -ROOM_D / 2 + 0.05);
 windowGroup.userData.hotspot = "window";
 room.add(windowGroup);
-box(windowGroup, winW + 0.2, 0.1, 0.12, WOOD, 0, winY - winH / 2 - 0.05, 0, { hotspot: "window" });
-box(windowGroup, winW + 0.2, 0.1, 0.12, WOOD, 0, winY + winH / 2 + 0.05, 0, { hotspot: "window" });
-box(windowGroup, 0.1, winH + 0.2, 0.12, WOOD, -winW / 2 - 0.05, winY, 0, { hotspot: "window" });
-box(windowGroup, 0.1, winH + 0.2, 0.12, WOOD, winW / 2 + 0.05, winY, 0, { hotspot: "window" });
-box(windowGroup, 0.05, winH, 0.08, WOOD, 0, winY, 0.02, { hotspot: "window" });
-box(windowGroup, winW, 0.05, 0.08, WOOD, 0, winY, 0.02, { hotspot: "window" });
-const sky = box(windowGroup, winW - 0.03, winH - 0.03, 0.03, SKY, 0, winY, -0.04, { hotspot: "window" });
-sph(windowGroup, 0.2, 0xF0F4F8, -0.25, winY + 0.18, -0.06, { sx: 1.3, sy: 0.5, sz: 0.3, hotspot: "window" });
-sph(windowGroup, 0.16, 0xF4F8FC, 0.22, winY + 0.06, -0.06, { sx: 1.4, sy: 0.45, sz: 0.3, hotspot: "window" });
+box(windowGroup, winW + 0.14, 0.07, 0.1, WOOD, 0, winY - winH / 2 - 0.035, 0, { hotspot: "window" });
+box(windowGroup, winW + 0.14, 0.07, 0.1, WOOD, 0, winY + winH / 2 + 0.035, 0, { hotspot: "window" });
+box(windowGroup, 0.07, winH + 0.14, 0.1, WOOD, -winW / 2 - 0.035, winY, 0, { hotspot: "window" });
+box(windowGroup, 0.07, winH + 0.14, 0.1, WOOD, winW / 2 + 0.035, winY, 0, { hotspot: "window" });
+box(windowGroup, 0.04, winH, 0.06, WOOD, 0, winY, 0.02, { hotspot: "window" });
+box(windowGroup, winW, 0.04, 0.06, WOOD, 0, winY, 0.02, { hotspot: "window" });
+const sky = box(windowGroup, winW - 0.02, winH - 0.02, 0.02, SKY, 0, winY, -0.03, { hotspot: "window" });
+sph(windowGroup, 0.14, 0xF0F4F8, -0.15, winY + 0.12, -0.04, { sx: 1.2, sy: 0.5, sz: 0.3, hotspot: "window" });
+sph(windowGroup, 0.11, 0xF4F8FC, 0.16, winY + 0.04, -0.04, { sx: 1.3, sy: 0.45, sz: 0.3, hotspot: "window" });
 
 const desk = new THREE.Group();
-desk.position.set(0, 0, 0.2);
+desk.position.set(0, 0, -0.2);
 desk.userData.hotspot = "desk";
 room.add(desk);
-box(desk, 1.5, 0.1, 0.8, WOOD, 0, 0.85, 0, { hotspot: "desk" });
-box(desk, 0.1, 0.8, 0.65, WOOD_DK, -0.6, 0.42, 0, { hotspot: "desk" });
-box(desk, 0.1, 0.8, 0.65, WOOD_DK, 0.6, 0.42, 0, { hotspot: "desk" });
-box(desk, 0.45, 0.18, 0.52, WOOD_LT, 0.42, 0.68, 0.08, { hotspot: "desk" });
-box(desk, 0.38, 0.05, 0.06, 0x8A7A5A, 0.42, 0.56, 0.3, { hotspot: "desk" });
+box(desk, 1.2, 0.08, 0.65, WOOD, 0, 0.7, 0, { hotspot: "desk" });
+box(desk, 0.08, 0.65, 0.55, WOOD_DK, -0.5, 0.35, 0, { hotspot: "desk" });
+box(desk, 0.08, 0.65, 0.55, WOOD_DK, 0.5, 0.35, 0, { hotspot: "desk" });
+box(desk, 0.36, 0.14, 0.42, WOOD_LT, 0.32, 0.56, 0.06, { hotspot: "desk" });
+box(desk, 0.3, 0.04, 0.05, 0x8A7A5A, 0.32, 0.46, 0.24, { hotspot: "desk" });
 
-box(desk, 0.58, 0.015, 0.42, SAGE, 0, 0.91, 0.05, { hotspot: "desk" });
+box(desk, 0.48, 0.012, 0.34, SAGE, -0.08, 0.75, 0.04, { hotspot: "desk" });
 const notebook = new THREE.Group();
-notebook.position.set(0.02, 0.93, 0.05);
+notebook.position.set(-0.06, 0.77, 0.04);
 desk.add(notebook);
-box(notebook, 0.38, 0.02, 0.28, PAPER, 0, 0, 0, { hotspot: "desk" });
-box(notebook, 0.38, 0.02, 0.28, 0xF0E8DC, 0, -0.012, 0, { hotspot: "desk" });
-for (let i = 0; i < 5; i++) {
-  cyl(notebook, 0.01, 0.01, 0.03, 0x888888, 0, 0.012, -0.11 + i * 0.05, { rx: Math.PI / 2 });
+box(notebook, 0.32, 0.016, 0.24, PAPER, 0, 0, 0, { hotspot: "desk" });
+box(notebook, 0.32, 0.016, 0.24, 0xF0E8DC, 0, -0.01, 0, { hotspot: "desk" });
+for (let i = 0; i < 4; i++) {
+  cyl(notebook, 0.008, 0.008, 0.025, 0x888888, 0, 0.01, -0.09 + i * 0.045, { rx: Math.PI / 2 });
 }
-for (let i = 0; i < 6; i++) {
-  box(notebook, 0.28, 0.002, 0.006, 0xCCC8C0, 0.03, 0.012, -0.09 + i * 0.03);
+for (let i = 0; i < 5; i++) {
+  box(notebook, 0.22, 0.002, 0.005, 0xCCC8C0, 0.02, 0.01, -0.07 + i * 0.028);
 }
 
 const lamp = new THREE.Group();
-lamp.position.set(-0.52, 0.9, -0.15);
+lamp.position.set(-0.42, 0.74, -0.18);
 desk.add(lamp);
-cyl(lamp, 0.08, 0.1, 0.05, SAGE, 0, 0.025, 0);
-cyl(lamp, 0.02, 0.02, 0.18, SAGE, 0, 0.14, 0);
-cyl(lamp, 0.11, 0.06, 0.13, 0xFAF6E8, 0, 0.27, 0);
-const lampGlow = sph(lamp, 0.05, 0xFFF8E0, 0, 0.22, 0);
+cyl(lamp, 0.06, 0.08, 0.04, SAGE, 0, 0.02, 0);
+cyl(lamp, 0.016, 0.016, 0.14, SAGE, 0, 0.11, 0);
+cyl(lamp, 0.09, 0.05, 0.1, 0xFAF6E8, 0, 0.21, 0);
+const lampGlow = sph(lamp, 0.04, 0xFFF8E0, 0, 0.17, 0);
 
 const mug = new THREE.Group();
-mug.position.set(0.52, 0.9, 0.12);
+mug.position.set(0.38, 0.74, 0.1);
 desk.add(mug);
-cyl(mug, 0.065, 0.055, 0.11, SAGE, 0, 0.055, 0);
-cyl(mug, 0.052, 0.048, 0.1, 0x8A6A4A, 0, 0.06, 0);
-const handle = new THREE.TorusGeometry(0.032, 0.01, 8, 12, Math.PI);
+cyl(mug, 0.05, 0.042, 0.09, SAGE, 0, 0.045, 0);
+cyl(mug, 0.04, 0.036, 0.08, 0x8A6A4A, 0, 0.05, 0);
+const handle = new THREE.TorusGeometry(0.026, 0.008, 8, 12, Math.PI);
 const handleMesh = new THREE.Mesh(handle, flat(SAGE));
-handleMesh.position.set(0.072, 0.055, 0);
+handleMesh.position.set(0.058, 0.045, 0);
 handleMesh.rotation.z = Math.PI / 2;
 handleMesh.rotation.y = Math.PI / 2;
 mug.add(handleMesh);
 
-const glow = box(desk, 0.4, 0.008, 0.32, 0xFFF8D0, 0, 0.92, 0.05);
+const glow = box(desk, 0.34, 0.006, 0.26, 0xFFF8D0, -0.08, 0.76, 0.04);
 glow.visible = false;
 glow.name = "glow";
 
 const chair = new THREE.Group();
-chair.position.set(0, 0, -0.55);
+chair.position.set(0, 0, 0.42);
 room.add(chair);
-box(chair, 0.48, 0.08, 0.42, SAGE_LT, 0, 0.58, 0);
-box(chair, 0.42, 0.42, 0.06, SAGE_LT, 0, 0.82, 0.18);
-cyl(chair, 0.028, 0.028, 0.52, WOOD, -0.18, 0.28, -0.16);
-cyl(chair, 0.028, 0.028, 0.52, WOOD, 0.18, 0.28, -0.16);
-cyl(chair, 0.028, 0.028, 0.52, WOOD, -0.18, 0.28, 0.16);
-cyl(chair, 0.028, 0.028, 0.52, WOOD, 0.18, 0.28, 0.16);
+box(chair, 0.4, 0.06, 0.36, SAGE_LT, 0, 0.48, 0);
+box(chair, 0.36, 0.36, 0.05, SAGE_LT, 0, 0.7, -0.155);
+cyl(chair, 0.024, 0.024, 0.44, WOOD, -0.15, 0.24, -0.14);
+cyl(chair, 0.024, 0.024, 0.44, WOOD, 0.15, 0.24, -0.14);
+cyl(chair, 0.024, 0.024, 0.44, WOOD, -0.15, 0.24, 0.14);
+cyl(chair, 0.024, 0.024, 0.44, WOOD, 0.15, 0.24, 0.14);
 
 const picture = new THREE.Group();
-picture.position.set(-ROOM_W / 2 + 0.06, 1.9, 0.6);
+picture.position.set(-ROOM_W / 2 + 0.05, 1.5, 0.55);
 room.add(picture);
-box(picture, 0.06, 0.48, 0.4, WOOD, 0, 0, 0);
-box(picture, 0.025, 0.4, 0.32, 0xF8F0E8, 0.03, 0, 0);
-sph(picture, 0.06, 0xE8A090, 0.04, 0.06, 0.04, { sy: 0.6 });
-sph(picture, 0.05, 0xE8A090, 0.04, 0.04, -0.06, { sy: 0.5 });
-box(picture, 0.012, 0.1, 0.025, LEAF, 0.04, -0.06, 0.015);
-box(picture, 0.012, 0.08, 0.025, LEAF, 0.04, -0.04, -0.05);
+box(picture, 0.05, 0.38, 0.32, WOOD, 0, 0, 0);
+box(picture, 0.02, 0.32, 0.26, 0xF8F0E8, 0.025, 0, 0);
+sph(picture, 0.05, 0xE8A090, 0.035, 0.05, 0.03, { sy: 0.55 });
+sph(picture, 0.04, 0xE8A090, 0.035, 0.03, -0.04, { sy: 0.45 });
+box(picture, 0.01, 0.08, 0.02, LEAF, 0.035, -0.05, 0.01);
+box(picture, 0.01, 0.06, 0.02, LEAF, 0.035, -0.03, -0.04);
 
 const board = new THREE.Group();
-board.position.set(-ROOM_W / 2 + 0.06, 1.65, -0.5);
+board.position.set(-ROOM_W / 2 + 0.05, 1.4, -0.35);
 board.userData.hotspot = "board";
 room.add(board);
-box(board, 0.06, 0.7, 0.52, WOOD, 0, 0, 0, { hotspot: "board" });
-box(board, 0.025, 0.6, 0.44, CORK, 0.03, 0, 0, { hotspot: "board" });
-box(board, 0.012, 0.14, 0.11, 0xE8D0C0, 0.045, 0.13, -0.08, { hotspot: "board" });
-box(board, 0.012, 0.12, 0.09, 0xD4E8C0, 0.045, -0.05, 0.11, { hotspot: "board" });
-box(board, 0.012, 0.09, 0.11, 0xF8E8D0, 0.045, 0.18, 0.13, { hotspot: "board" });
-box(board, 0.012, 0.1, 0.08, 0xF0D8D8, 0.045, -0.16, -0.05, { hotspot: "board" });
-const boardGlow = box(board, 0.012, 0.6, 0.44, 0xFFF8D0, 0.04, 0, 0, { mat: { transparent: true, opacity: 0.4 } });
+box(board, 0.05, 0.55, 0.42, WOOD, 0, 0, 0, { hotspot: "board" });
+box(board, 0.02, 0.48, 0.36, CORK, 0.025, 0, 0, { hotspot: "board" });
+box(board, 0.01, 0.11, 0.09, 0xE8D0C0, 0.038, 0.1, -0.06, { hotspot: "board" });
+box(board, 0.01, 0.1, 0.07, 0xD4E8C0, 0.038, -0.04, 0.09, { hotspot: "board" });
+box(board, 0.01, 0.07, 0.09, 0xF8E8D0, 0.038, 0.14, 0.1, { hotspot: "board" });
+box(board, 0.01, 0.08, 0.06, 0xF0D8D8, 0.038, -0.13, -0.04, { hotspot: "board" });
+const boardGlow = box(board, 0.01, 0.48, 0.36, 0xFFF8D0, 0.035, 0, 0, { mat: { transparent: true, opacity: 0.4 } });
 boardGlow.visible = false;
 boardGlow.name = "boardGlow";
 
 const plant = new THREE.Group();
-plant.position.set(ROOM_W / 2 - 0.5, 0, -0.3);
+plant.position.set(ROOM_W / 2 - 0.4, 0, 0.4);
 plant.userData.hotspot = "plant";
 room.add(plant);
-cyl(plant, 0.3, 0.25, 0.45, SAGE, 0, 0.22, 0, { hotspot: "plant" });
-cyl(plant, 0.28, 0.28, 0.06, 0x6A5A4A, 0, 0.42, 0, { hotspot: "plant" });
+cyl(plant, 0.22, 0.18, 0.36, SAGE, 0, 0.18, 0, { hotspot: "plant" });
+cyl(plant, 0.2, 0.2, 0.05, 0x6A5A4A, 0, 0.34, 0, { hotspot: "plant" });
 
 function monsteraLeaf(g, x, y, z, ry, scale) {
   const leaf = new THREE.Group();
@@ -228,38 +228,39 @@ function monsteraLeaf(g, x, y, z, ry, scale) {
   leaf.rotation.y = ry;
   leaf.scale.setScalar(scale || 1);
   g.add(leaf);
-  cyl(leaf, 0.012, 0.016, 0.32, LEAF_DK, 0, 0.16, 0, { rx: -0.3 });
-  sph(leaf, 0.18, LEAF, 0, 0.42, 0.06, { sy: 0.35, sz: 0.9, rx: -0.4 });
-  sph(leaf, 0.14, LEAF_DK, -0.06, 0.38, 0.1, { sy: 0.3, sz: 0.7, rx: -0.35 });
+  cyl(leaf, 0.01, 0.013, 0.26, LEAF_DK, 0, 0.13, 0, { rx: -0.3 });
+  sph(leaf, 0.14, LEAF, 0, 0.34, 0.05, { sy: 0.32, sz: 0.85, rx: -0.4 });
+  sph(leaf, 0.11, LEAF_DK, -0.05, 0.3, 0.08, { sy: 0.28, sz: 0.65, rx: -0.35 });
 }
-monsteraLeaf(plant, 0.08, 0.45, 0.12, 0.3, 1.0);
-monsteraLeaf(plant, -0.12, 0.45, 0.08, -0.5, 0.9);
-monsteraLeaf(plant, 0.04, 0.45, -0.1, 2.8, 0.85);
-monsteraLeaf(plant, -0.08, 0.48, -0.06, -2.2, 0.75);
-monsteraLeaf(plant, 0.14, 0.42, 0, 1.2, 0.8);
+monsteraLeaf(plant, 0.06, 0.36, 0.1, 0.3, 1.0);
+monsteraLeaf(plant, -0.1, 0.36, 0.06, -0.5, 0.9);
+monsteraLeaf(plant, 0.03, 0.36, -0.08, 2.8, 0.85);
+monsteraLeaf(plant, -0.06, 0.38, -0.04, -2.2, 0.75);
+monsteraLeaf(plant, 0.11, 0.34, 0, 1.2, 0.8);
 
 const cairn = new THREE.Group();
-cairn.position.set(0, 0.62, -0.55);
+cairn.position.set(0, 0.52, 0.42);
+cairn.rotation.y = Math.PI;
 cairn.userData.hotspot = "cairn";
 room.add(cairn);
 
-sph(cairn, 0.26, TERR, 0, 0.22, 0, { sy: 0.7, sx: 1.05, sz: 1.0, hotspot: "cairn" });
-sph(cairn, 0.22, TERR_LT, 0, 0.46, 0, { sy: 0.65, sx: 1.0, sz: 0.95, hotspot: "cairn" });
-sph(cairn, 0.19, TERR, 0, 0.67, 0, { sy: 0.6, sx: 0.98, sz: 0.92, hotspot: "cairn" });
-sph(cairn, 0.16, TERR_LT, 0, 0.83, 0, { sy: 0.55, sx: 0.95, sz: 0.9, hotspot: "cairn" });
-const cap = cyl(cairn, 0.18, 0.21, 0.08, OLIVE, 0, 0.99, 0, { hotspot: "cairn" });
-cap.rotation.x = 0.12;
-cap.rotation.z = -0.08;
+sph(cairn, 0.2, TERR, 0, 0.08, 0, { sy: 0.55, sx: 1.0, sz: 0.95, hotspot: "cairn" });
+sph(cairn, 0.17, TERR_LT, 0, 0.26, 0, { sy: 0.55, sx: 0.95, sz: 0.9, hotspot: "cairn" });
+sph(cairn, 0.15, TERR, 0, 0.42, 0, { sy: 0.52, sx: 0.92, sz: 0.88, hotspot: "cairn" });
+sph(cairn, 0.13, TERR_LT, 0, 0.55, 0, { sy: 0.5, sx: 0.9, sz: 0.85, hotspot: "cairn" });
+const cap = cyl(cairn, 0.15, 0.17, 0.06, OLIVE, 0, 0.68, 0, { hotspot: "cairn" });
+cap.rotation.x = 0.1;
+cap.rotation.z = -0.06;
 
-sph(cairn, 0.032, 0x2A2420, -0.065, 0.82, 0.14, { hotspot: "cairn" });
-sph(cairn, 0.032, 0x2A2420, 0.065, 0.82, 0.14, { hotspot: "cairn" });
+sph(cairn, 0.026, 0x2A2420, -0.052, 0.54, 0.11, { hotspot: "cairn" });
+sph(cairn, 0.026, 0x2A2420, 0.052, 0.54, 0.11, { hotspot: "cairn" });
 
-const leftArm = cyl(cairn, 0.024, 0.018, 0.34, TWIG, -0.22, 0.52, 0.12, { rz: 0.7, ry: -0.3, hotspot: "cairn" });
-const rightArm = cyl(cairn, 0.024, 0.018, 0.34, TWIG, 0.22, 0.52, 0.12, { rz: -0.7, ry: 0.3, hotspot: "cairn" });
-const pencil = cyl(cairn, 0.014, 0.014, 0.18, 0xE8C85A, 0.26, 0.34, 0.34, { rx: 1.1, rz: -0.3 });
-cyl(cairn, 0.016, 0.01, 0.032, 0xF8E8D8, 0.27, 0.29, 0.4, { rx: 1.1, rz: -0.3 });
+const leftArm = cyl(cairn, 0.02, 0.015, 0.28, TWIG, -0.12, 0.3, 0.18, { rz: 0.4, rx: -0.6, hotspot: "cairn" });
+const rightArm = cyl(cairn, 0.02, 0.015, 0.28, TWIG, 0.1, 0.3, 0.18, { rz: -0.3, rx: -0.6, hotspot: "cairn" });
+const pencil = cyl(cairn, 0.012, 0.012, 0.15, 0xE8C85A, 0.06, 0.15, 0.42, { rx: -1.2, rz: 0.15 });
+cyl(cairn, 0.013, 0.008, 0.028, 0xF8E8D8, 0.055, 0.12, 0.48, { rx: -1.2, rz: 0.15 });
 
-cairn.userData.baseY = 0.62;
+cairn.userData.baseY = 0.52;
 cairn.userData.sitting = true;
 
 const objectGoals = {
